@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face{
+  font-family: 'galmuri';
+  src: url("fonts/Galmuri14.woff2") format("woff2");
+  
+}
+
+* {
+  font-family: 'galmuri';
+}
