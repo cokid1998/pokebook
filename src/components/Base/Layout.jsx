@@ -5,7 +5,7 @@ function Layout({ children }) {
   return (
     <div className="w-svw h-svh flex flex-col justify-between">
       <Header />
-      {children}
+      <div className="px-10">{children}</div>
       <Footer />
     </div>
   );
