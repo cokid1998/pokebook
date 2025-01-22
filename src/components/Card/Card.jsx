@@ -9,7 +9,13 @@ function Card({ pokemon }) {
     >
       <div>
         {pokemon.id} {pokemon.name}
-        <img src={pokemon.gif} />
+        <img
+          src={pokemon.gif}
+          className="w-96 h-96 object-contain pixelated"
+          style={{
+            imageRendering: "pixelated",
+          }}
+        />
       </div>
     </Link>
   );

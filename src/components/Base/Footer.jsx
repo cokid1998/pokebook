@@ -1,5 +1,5 @@
 function Footer() {
-  return <div>footer</div>;
+  return <div className="px-layout-padding-x">footer</div>;
 }
 
 export default Footer;
