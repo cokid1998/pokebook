@@ -1,8 +1,44 @@
+import { Moon, Search, Sun } from "lucide-react";
+import { useState } from "react";
+import Logo from "@/asset/Logo.png";
+
 function Header() {
+  const [isDark, setIsDark] = useState(false);
+
+  const toggleIsDark = () => {
+    setIsDark((prev) => !prev);
+  };
+
   return (
-    <div className="px-layout-padding-x py-24 font-bold bg-[#16b8a6] text-white text-24">
-      포켓몬 도감
-    </div>
+    <header className="sticky top-0 z-50 w-full bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-16 py-12">
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
+        <div className="flex items-center">
+          <img src={Logo} alt="Pokemon Logo" className="h-40" />
+        </div>
+
+        <div className="flex items-center gap-16">
+          <div className="relative flex items-center">
+            <input
+              type="text"
+              placeholder="포켓몬 검색..."
+              className="pl-40 pr-16 py-8 border border-gray-300 dark:border-gray-600 rounded-full w-246 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+            />
+            <Search className="absolute left-12 text-gray-400" size={20} />
+          </div>
+
+          <button
+            onClick={toggleIsDark}
+            className="p-8 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+          >
+            {isDark ? (
+              <Sun className="text-yellow-500" size={24} />
+            ) : (
+              <Moon className="text-gray-500" size={24} />
+            )}
+          </button>
+        </div>
+      </div>
+    </header>
   );
 }
 
