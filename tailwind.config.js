@@ -1,4 +1,5 @@
 import pxToRem from "tailwindcss-preset-px-to-rem";
+import colors from "./src/styles/colors";
 
 const pxToRemFunc = (px) => {
   return `${px / 16}rem`;
@@ -21,6 +22,7 @@ export default {
       desktop: { min: "1024px" },
     },
     extend: {
+      colors,
       spacing: {
         "layout-padding-x": pxToRemFunc(64),
         "header-height": HEADER_HEIGHT,
