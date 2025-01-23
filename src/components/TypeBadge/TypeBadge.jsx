@@ -1,11 +1,11 @@
 import typeToKorean from "@/utils/typeToKorean";
-import Poison from "@/asset/icon/poison.svg";
+import typeToIcon from "@/utils/typeToIcon";
 
 function TypeBadge({ type }) {
   return (
-    <div>
+    <div className="min-w-34 max-w-34 flex flex-col gap-4">
       {typeToKorean(type)}
-      <Poison />
+      {typeToIcon(type)}
     </div>
   );
 }

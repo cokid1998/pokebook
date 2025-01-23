@@ -11,7 +11,7 @@ function Card({ pokemon }) {
         onClick={() => setIsModalOpen(true)}
       >
         <div className="p-16 flex flex-col items-center">
-          <div className="w-128 h-128 flex items-center justify-center">
+          <div className="w-fit h-fit flex items-center justify-center">
             <img
               src={gif}
               alt={"pokemon.gif"}
@@ -23,7 +23,7 @@ function Card({ pokemon }) {
           </div>
 
           <div className="mt-16 text-center">
-            <span className="text-gray-500 dark:text-gray-400 text-sm">
+            <span className="text-gray-500 dark:text-gray-400 text-sm inline-block mb-10">
               #{String(id).padStart(3, "0")}
             </span>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
