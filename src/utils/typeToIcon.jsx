@@ -15,7 +15,7 @@ import Poison from "@/asset/icon/poison.svg";
 import Psychic from "@/asset/icon/psychic.svg";
 import Rock from "@/asset/icon/rock.svg";
 import Steel from "@/asset/icon/steel.svg";
-import Water from "@/asset/icon/Water.svg";
+import Water from "@/asset/icon/water.svg";
 
 const typeToIcon = (type) => {
   switch (type) {
