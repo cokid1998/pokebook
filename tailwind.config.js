@@ -1,9 +1,6 @@
 import pxToRem from "tailwindcss-preset-px-to-rem";
 import colors from "./src/styles/colors";
-
-const pxToRemFunc = (px) => {
-  return `${px / 16}rem`;
-};
+import pxToRemFunc from "./src/utils/pxToRemFunc";
 
 // 헤더 높이 : 68
 // 푸터 높이 : 94
