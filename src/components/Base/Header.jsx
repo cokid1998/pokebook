@@ -10,7 +10,7 @@ function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-16 py-12">
+    <header className="h-header-height sticky top-0 z-50 w-full bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-16 py-12">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center">
           <img src={Logo} alt="Pokemon Logo" className="h-40" />
