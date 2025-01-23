@@ -2,7 +2,7 @@ import API from "@/api/API";
 
 const getAllPokemonGifAndTypes = () => {
   let gifArr = [];
-  // let koTypes = [];
+  let koTypes = [];
   const fetchData = async () => {
     for (let i = 0; i < 9; i++) {
       const res = await API.get(`/pokemon/${i + 1}`);
@@ -12,14 +12,20 @@ const getAllPokemonGifAndTypes = () => {
           .front_default
       );
 
-      // for (let j = 0; j < res.data.types.length; j++) {
-      //   const koTypeUrl = res.data.types[j].type.url;
-      //   const koTypeRes = await API.get(koTypeUrl);
-      //   koTypes.push({ [j]: koTypeRes.data.names[1].name });
-      // }
+      let type = [];
+      for (let j = 0; j < res.data.types.length; j++) {
+        type.push(res.data.types[j].type.name);
+      }
+      koTypes.push(type);
     }
+    const combineGifAndTypesArr = gifArr.map((gif, idx) => {
+      return {
+        gif: gif,
+        types: koTypes[idx],
+      };
+    });
 
-    return gifArr;
+    return combineGifAndTypesArr;
   };
   return fetchData();
 };

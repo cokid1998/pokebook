@@ -7,23 +7,25 @@ function Content() {
   const result = useQueries({
     queries: [
       { queryKey: ["idNameList"], queryFn: () => getAllPokemonIdName() },
-      { queryKey: ["gifList"], queryFn: () => getAllPokemonGifAndTypes() },
+      { queryKey: ["gifTypesList"], queryFn: () => getAllPokemonGifAndTypes() },
     ],
   });
 
-  const [nameInfo, gifInfo] = result;
+  const [nameInfo, gifTypesInfo] = result;
 
-  if (nameInfo.isLoading || gifInfo.isLoading) return <div>로딩중</div>;
-  if (nameInfo.isError || gifInfo.isError)
+  if (nameInfo.isLoading || gifTypesInfo.isLoading) return <div>로딩중</div>;
+  if (nameInfo.isError || gifTypesInfo.isError)
     return <div>에러가 발생했습니다.</div>;
 
   const combinePokemonArr = nameInfo.data.map((info, idx) => {
     return {
       id: info.id,
       name: info.name,
-      gif: gifInfo.data[idx],
+      gif: gifTypesInfo.data[idx].gif,
+      types: gifTypesInfo.data[idx].types,
     };
   });
+
   return (
     <main className="h-content-height flex-1 w-full bg-gray-50 dark:bg-gray-900 px-16 py-32">
       <div className="max-w-7xl mx-auto">
