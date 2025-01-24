@@ -1,5 +1,6 @@
-import TypeBadge from "@/components/TypeBadge/TypeBadge";
 import { useState } from "react";
+import TypeBadge from "@/components/TypeBadge/TypeBadge";
+import Modal from "@/components/Modal/Modal";
 
 function Card({ pokemon }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -8,7 +9,7 @@ function Card({ pokemon }) {
     <>
       <div
         className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105 cursor-pointer"
-        onClick={() => setIsModalOpen(true)}
+        onClick={() => setIsModalOpen((prev) => !prev)}
       >
         <div className="p-16 flex flex-col items-center">
           <div className="w-fit h-fit flex items-center justify-center">
@@ -37,7 +38,9 @@ function Card({ pokemon }) {
           </div>
         </div>
       </div>
-      {/* {isModalOpen && <Modal />} */}
+      {isModalOpen && (
+        <Modal pokemon={pokemon} setIsModalOpen={setIsModalOpen} />
+      )}
     </>
   );
 }

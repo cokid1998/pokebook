@@ -27,7 +27,7 @@ function TypeBadge({ type }) {
     stellar: "text-[#44628D]",
   };
   return (
-    <div className="min-w-34 max-w-34 flex flex-col gap-4">
+    <div className="min-w-34 max-w-34 flex flex-col gap-4 items-center">
       <span className={`${textColor[type]}`}>{typeToKorean(type)}</span>
       {typeToIcon(type)}
     </div>
