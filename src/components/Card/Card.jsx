@@ -39,7 +39,11 @@ function Card({ pokemon }) {
         </div>
       </div>
       {isModalOpen && (
-        <Modal pokemon={pokemon} setIsModalOpen={setIsModalOpen} />
+        <Modal
+          pokemon={pokemon}
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+        />
       )}
     </>
   );
