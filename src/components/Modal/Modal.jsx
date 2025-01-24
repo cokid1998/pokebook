@@ -3,7 +3,7 @@ import useBodyScrollLock from "@/hooks/useBodyScrollLock";
 import { X } from "lucide-react";
 import TypeBadge from "@/components/TypeBadge/TypeBadge";
 
-function Modal({ isModalOpen, setIsModalOpen, pokemon }) {
+function Modal({ modalRef, isModalOpen, setIsModalOpen, pokemon }) {
   const [showShiny, setShowShiny] = useState(false);
   const { types, gif, name } = pokemon;
 
@@ -15,6 +15,7 @@ function Modal({ isModalOpen, setIsModalOpen, pokemon }) {
         isModalOpen ? "animate-opacity-in" : "animate-opacity-out"
       }`}
       onClick={() => setIsModalOpen((prev) => !prev)}
+      ref={modalRef}
     >
       <div
         className={`bg-white dark:bg-gray-800 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto  ${

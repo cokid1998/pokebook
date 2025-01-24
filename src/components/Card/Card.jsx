@@ -1,15 +1,20 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import TypeBadge from "@/components/TypeBadge/TypeBadge";
 import Modal from "@/components/Modal/Modal";
+import useExitAnimation from "@/hooks/useExitAnimation";
 
 function Card({ pokemon }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { types, gif, id, name } = pokemon;
+  const modalRef = useRef(null);
+  const isExiting = useExitAnimation(modalRef, isModalOpen);
+  // isExiting을 콘솔로그로 찍어보면 불러온 포켓몬 데이터만큼 실행됨... 성능최적화 필요
+
   return (
     <>
       <div
         className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105 cursor-pointer"
-        onClick={() => setIsModalOpen((prev) => !prev)}
+        onClick={() => setIsModalOpen(true)}
       >
         <div className="p-16 flex flex-col items-center">
           <div className="w-fit h-fit flex items-center justify-center">
@@ -38,8 +43,10 @@ function Card({ pokemon }) {
           </div>
         </div>
       </div>
-      {isModalOpen && (
+
+      {(isModalOpen || isExiting) && (
         <Modal
+          modalRef={modalRef}
           pokemon={pokemon}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
