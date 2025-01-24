@@ -1,10 +1,13 @@
-import { X } from "lucide-react";
 import { useState } from "react";
+import useBodyScrollLock from "@/hooks/useBodyScrollLock";
+import { X } from "lucide-react";
 import TypeBadge from "@/components/TypeBadge/TypeBadge";
 
 function Modal({ isModalOpen, setIsModalOpen, pokemon }) {
   const [showShiny, setShowShiny] = useState(false);
   const { types, gif, name } = pokemon;
+
+  useBodyScrollLock(isModalOpen);
 
   return (
     <div
