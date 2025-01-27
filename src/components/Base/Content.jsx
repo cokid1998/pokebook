@@ -53,8 +53,6 @@ function Content() {
   // if (nameInfo.isError || gifTypesInfo.isError)
   //   return <div>에러가 발생했습니다.</div>;
 
-  console.log(isFetchingNextPage);
-
   return (
     <main className="flex-1 w-full bg-gray-50 dark:bg-gray-900 px-16 py-32">
       <div className="max-w-7xl mx-auto">

@@ -40,35 +40,4 @@ const getAllPokemonGifAndTypes = (pageParam) => {
 
 export default getAllPokemonGifAndTypes;
 
-// // gif
-// for (let i = 0; i < 1; i++) {
-//   let url = `https://pokeapi.co/api/v2/pokemon/${i + 1}`;
-//   const fetchData = async () => {
-//     const res = await fetch(url);
-//     const data = await res.json();
-//     // console.log(
-//     //   data.sprites.versions["generation-v"]["black-white"].animated
-//     //     .front_default
-//     // );
-//   };
-//   fetchData();
-// }
-
-// // 타입
-// for (let i = 0; i < 1; i++) {
-//   const fetchData = async () => {
-//     let url = `https://pokeapi.co/api/v2/pokemon/${i + 1}`;
-//     const res = await fetch(url);
-//     const data = await res.json();
-//     let koTypes = [];
-//     for (let i = 0; i < data.types.length; i++) {
-//       const koTypeUrl = data.types[i].type.url;
-//       const koTypeRes = await fetch(koTypeUrl);
-//       const koTypeData = await koTypeRes.json();
-//       const koType = koTypeData.names[1].name;
-//       koTypes.push(koType);
-//     }
-//     // console.log(koTypes);
-//   };
-//   fetchData();
-// }
+// // gi
