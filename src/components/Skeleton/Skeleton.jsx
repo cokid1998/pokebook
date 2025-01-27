@@ -1,8 +1,10 @@
 const tmp = ["", "", "", "", "", "", "", "", ""];
 
-function Skeleton() {
+function Skeleton({ style }) {
   return (
-    <main className="flex-1 w-full bg-gray-50 dark:bg-gray-900 px-16 py-32 h-content-height">
+    <main
+      className={`flex-1 w-full bg-gray-50 dark:bg-gray-900 px-16 py-32 h-content-height ${style}`}
+    >
       <div className="max-w-7xl mx-auto">
         <div className="grid mobile:grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-3 gap-24 mb-24">
           {tmp.map((_, idx) => {

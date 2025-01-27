@@ -70,7 +70,7 @@ function Content() {
           })}
         </div>
       </div>
-      {isFetchingNextPage && <Skeleton />}
+      {isFetchingNextPage && <Skeleton style={"pt-0"} />}
       <div className="h-1" ref={ref} />
     </main>
   );
