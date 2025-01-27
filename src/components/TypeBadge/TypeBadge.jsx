@@ -28,7 +28,9 @@ function TypeBadge({ type }) {
   };
   return (
     <div className="min-w-34 max-w-34 flex flex-col gap-4 items-center">
-      <span className={`${textColor[type]}`}>{typeToKorean(type)}</span>
+      <span className={`${textColor[type]} min-w-50 text-center`}>
+        {typeToKorean(type)}
+      </span>
       {typeToIcon(type)}
     </div>
   );

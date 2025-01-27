@@ -35,7 +35,7 @@ function Card({ pokemon }) {
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               {name}
             </h3>
-            <div className="mt-8 flex gap-8 justify-center">
+            <div className="mt-8 flex gap-10 justify-center">
               {types.map((type, idx) => (
                 <TypeBadge key={idx} type={type} koreanType={type.koreanType} />
               ))}
