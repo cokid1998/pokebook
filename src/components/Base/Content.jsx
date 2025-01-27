@@ -55,17 +55,18 @@ function Content() {
   return (
     <main className="flex-1 w-full bg-gray-50 dark:bg-gray-900 px-16 py-32">
       <div className="max-w-7xl mx-auto">
-        <div className="grid mobile:grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-3 gap-24">
-          {data.pages.map((page) => {
-            return (
-              <>
-                {page.map((pokemon) => {
-                  return <Card key={pokemon.id} pokemon={pokemon} />;
-                })}
-              </>
-            );
-          })}
-        </div>
+        {data.pages.map((page, idx) => {
+          return (
+            <div
+              key={idx}
+              className="grid mobile:grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-3 gap-24 mb-24"
+            >
+              {page.map((pokemon) => (
+                <Card key={pokemon.id} pokemon={pokemon} />
+              ))}
+            </div>
+          );
+        })}
       </div>
       <div className="h-1" ref={ref} />
     </main>
