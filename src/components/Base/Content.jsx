@@ -2,7 +2,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import getAllPokemonIdName from "@/api/getAllPokemonIdAndName";
 import getAllPokemonGifAndTypes from "@/api/getAllPokemonGifAndTypes";
 import Card from "@/components/Card/Card";
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 function Content() {
   const ref = useRef(null);
@@ -55,18 +55,17 @@ function Content() {
   return (
     <main className="flex-1 w-full bg-gray-50 dark:bg-gray-900 px-16 py-32">
       <div className="max-w-7xl mx-auto">
-        {data.pages.map((page, idx) => {
-          return (
-            <div
-              key={idx}
-              className="grid mobile:grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-3 gap-24 mb-24"
-            >
-              {page.map((pokemon) => (
-                <Card key={pokemon.id} pokemon={pokemon} />
-              ))}
-            </div>
-          );
-        })}
+        <div className="grid mobile:grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-3 gap-24 mb-24">
+          {data.pages.map((page, idx) => {
+            return (
+              <React.Fragment key={idx}>
+                {page.map((pokemon) => (
+                  <Card key={pokemon.id} pokemon={pokemon} />
+                ))}
+              </React.Fragment>
+            );
+          })}
+        </div>
       </div>
       <div className="h-1" ref={ref} />
     </main>
