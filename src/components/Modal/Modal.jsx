@@ -32,7 +32,6 @@ function Modal({ modalRef, isModalOpen, setIsModalOpen, pokemon }) {
       onClick={() => setIsModalOpen((prev) => !prev)}
       ref={modalRef}
     >
-      <LoadingSpinner type={types[0]} />
       {isLoading ? (
         <LoadingSpinner type={types[0]} />
       ) : (
