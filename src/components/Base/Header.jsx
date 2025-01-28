@@ -1,8 +1,11 @@
 import { Moon, Search, Sun } from "lucide-react";
 
 import Logo from "@/asset/Logo.png";
+import { useDarkMode } from "@/Context/DarkModeContext";
 
-function Header({ darkMode, toggleDarkMode }) {
+function Header() {
+  const { darkMode, handleDarkMode } = useDarkMode();
+
   return (
     <header className="h-header-height sticky top-0 z-50 w-full bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-16 py-12">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -21,7 +24,7 @@ function Header({ darkMode, toggleDarkMode }) {
           </div>
 
           <button
-            onClick={toggleDarkMode}
+            onClick={handleDarkMode}
             className="p-8 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
           >
             {darkMode ? (
