@@ -1,4 +1,6 @@
-const tmp = ["", "", "", "", "", "", "", "", ""];
+import { POKEMON_FETCH_UNIT } from "@/constants/constants";
+
+const tmp = Array.from({ length: POKEMON_FETCH_UNIT }, (_, i) => i);
 
 function Skeleton({ style }) {
   return (
