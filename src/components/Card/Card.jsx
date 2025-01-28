@@ -13,7 +13,7 @@ function Card({ pokemon }) {
   return (
     <>
       <div
-        className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105 cursor-pointer"
+        className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-[transform, colors] hover:scale-105 cursor-pointer duration-300 ease-in-out"
         onClick={() => setIsModalOpen(true)}
       >
         <div className="p-16 flex flex-col items-center">
