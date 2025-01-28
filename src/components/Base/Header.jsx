@@ -1,14 +1,8 @@
 import { Moon, Search, Sun } from "lucide-react";
-import { useState } from "react";
+
 import Logo from "@/asset/Logo.png";
 
-function Header() {
-  const [isDark, setIsDark] = useState(false);
-
-  const toggleIsDark = () => {
-    setIsDark((prev) => !prev);
-  };
-
+function Header({ darkMode, toggleDarkMode }) {
   return (
     <header className="h-header-height sticky top-0 z-50 w-full bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-16 py-12">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -27,10 +21,10 @@ function Header() {
           </div>
 
           <button
-            onClick={toggleIsDark}
+            onClick={toggleDarkMode}
             className="p-8 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
           >
-            {isDark ? (
+            {darkMode ? (
               <Sun className="text-yellow-500" size={24} />
             ) : (
               <Moon className="text-gray-500" size={24} />
