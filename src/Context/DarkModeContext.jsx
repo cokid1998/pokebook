@@ -3,11 +3,20 @@ import { useContext, useState, createContext, useEffect } from "react";
 const DarkModeContext = createContext();
 
 export function DarkModeProvider({ children }) {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("darkMode") === "dark"
+  );
 
   const handleDarkMode = () => {
-    setDarkMode(!darkMode);
+    setDarkMode((prev) => {
+      localStorage.setItem("darkMode", prev ? "light" : "dark");
+      return !prev;
+    });
   };
+
+  useEffect(() => {
+    localStorage.setItem("darkMode", darkMode ? "dark" : "light");
+  }, [darkMode]);
 
   return (
     <DarkModeContext.Provider value={{ darkMode, handleDarkMode }}>
