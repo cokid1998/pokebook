@@ -4,9 +4,11 @@ import getAllPokemonGifAndTypes from "@/api/getAllPokemonGifAndTypes";
 import Card from "@/components/Card/Card";
 import React, { useEffect, useRef } from "react";
 import Skeleton from "@/components/Skeleton/Skeleton";
+import { usePokemonListStore } from "@/store/store";
 
 function Content() {
   const ref = useRef(null);
+  const { pokemonList, setPokemonList } = usePokemonListStore();
   const {
     data,
     fetchNextPage,
@@ -21,12 +23,14 @@ function Content() {
     queryFn: async ({ pageParam }) => {
       const idNameList = await getAllPokemonIdName(pageParam + 1);
       const gifTypesList = await getAllPokemonGifAndTypes(pageParam + 1);
-      return idNameList.map((info, idx) => ({
+      const result = idNameList.map((info, idx) => ({
         id: info.id,
         name: info.name,
         gif: gifTypesList[idx].gif,
         types: gifTypesList[idx].types,
       }));
+      setPokemonList(result);
+      return result;
     },
     getNextPageParam: (lastPage, allPages) => {
       // 다음 페이지의 파라미터 반환 (예: next 페이지가 존재하면 증가)

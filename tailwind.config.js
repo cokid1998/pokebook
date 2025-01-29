@@ -44,12 +44,17 @@ export default {
           "0%": { opacity: "1" },
           "100%": { opacity: "0" },
         },
+        "focus-glow": {
+          "0%": { outline: "2px solid rgba(255, 0, 0, 0.8)" }, // 빨간색 아웃라인
+          "100%": { outline: "2px solid rgba(255, 0, 0, 0)" }, // 투명하게 사라짐
+        },
       },
       animation: {
         "fade-in": "fade-in 0.2s ease-out",
         "fade-out": "fade-out 0.2s ease-out",
         "opacity-in": "opacity-in 0.2s ease-out",
         "opacity-out": "opacity-out 0.2s ease-out",
+        "focus-glow": "focus-glow 1s ease-out",
       },
     },
   },

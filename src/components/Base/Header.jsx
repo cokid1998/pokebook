@@ -1,10 +1,15 @@
 import { Moon, Search, Sun } from "lucide-react";
-
 import Logo from "@/asset/Logo.png";
 import { useDarkMode } from "@/Context/DarkModeContext";
+import { useStore } from "@/store/store";
 
 function Header() {
   const { darkMode, handleDarkMode } = useDarkMode();
+  const { selectPokemonId, setSelectPokemonId } = useStore();
+
+  const handleClick = () => {
+    setSelectPokemonId(3);
+  };
 
   return (
     <header className="h-header-height sticky top-0 z-50 w-full bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-16 py-12">
@@ -12,6 +17,8 @@ function Header() {
         <div className="flex items-center">
           <img src={Logo} alt="Pokemon Logo" className="h-40" />
         </div>
+
+        <button onClick={handleClick}>asdf</button>
 
         <div className="flex items-center gap-16">
           <div className="relative flex items-center">
