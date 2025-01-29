@@ -6,6 +6,9 @@ export const useSelectPokemonIdStore = create((set) => {
     setSelectPokemonId: (id) => {
       set({ selectPokemonId: id });
     },
+    resetSelectedPokemonId: () => {
+      set({ selectPokemonId: null });
+    },
   };
 });
 

@@ -3,6 +3,7 @@ import TypeBadge from "@/components/TypeBadge/TypeBadge";
 import Modal from "@/components/Modal/Modal";
 import useExitAnimation from "@/hooks/useExitAnimation";
 import { useSelectPokemonIdStore } from "@/store/store";
+import { CARD_FOCUS_DURATION } from "@/constants/constants";
 
 function Card({ pokemon }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -10,7 +11,7 @@ function Card({ pokemon }) {
   const modalRef = useRef(null);
   const isExiting = useExitAnimation(modalRef, isModalOpen);
   // isExiting을 콘솔로그로 찍어보면 불러온 포켓몬 데이터만큼 실행됨... 성능최적화 필요
-  const { selectPokemonId, setSelectPokemonId } = useSelectPokemonIdStore();
+  const { selectPokemonId, resetSelectedPokemonId } = useSelectPokemonIdStore();
 
   const handleClick = () => {
     setIsModalOpen(true);
@@ -20,15 +21,15 @@ function Card({ pokemon }) {
 
   useEffect(() => {
     if (id !== selectPokemonId) return;
-
     focusRef.current.scrollIntoView({
       block: "center",
       inline: "center",
     });
-    setSelectPokemonId(id);
-
-    return () => setSelectPokemonId(null);
-  }, [id, selectPokemonId, setSelectPokemonId]);
+    const timeoutId = setTimeout(() => {
+      resetSelectedPokemonId();
+    }, CARD_FOCUS_DURATION * 1000);
+    return () => clearTimeout(timeoutId);
+  }, [id, selectPokemonId, resetSelectedPokemonId]);
 
   return (
     <>
@@ -36,7 +37,8 @@ function Card({ pokemon }) {
         ref={(node) => {
           if (id === selectPokemonId) focusRef.current = node;
         }}
-        className={`bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-[transform, colors] hover:scale-105 cursor-pointer duration-300 ease-in-out
+        className={`bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-[transform, colors] cursor-pointer
+          transition-all hover:scale-105
           ${
             id === selectPokemonId
               ? "animate-focus-glow border-red-500"
