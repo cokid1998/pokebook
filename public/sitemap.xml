@@ -6,4 +6,11 @@
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
+  <!-- 파비콘 URL 추가 -->
+  <url>
+    <loc>https://pokebook-ruby.vercel.app/favicon.ico</loc>
+    <lastmod>2025-01-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
 </urlset>
