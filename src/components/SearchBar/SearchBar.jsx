@@ -1,6 +1,6 @@
 import { Search } from "lucide-react";
 import { useSelectPokemonIdStore, usePokemonListStore } from "@/store/store";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { SEARCHBAR_WIDTH_DURATION } from "@/constants/constants";
 
 function SearchBar() {
@@ -16,18 +16,32 @@ function SearchBar() {
   useEffect(() => {
     if (!search) return;
     const trimmedSearch = search.replace(/\s+/g, "");
-    console.log(trimmedSearch);
     const result = pokemonList.filter((pokemon) => {
-      // 글자 하나 입력할때마다 포켓몬카드개수만큼 코드가 실행됨...
+      // 글자 하나 입력할때마다 포켓몬카드개수만큼 코드가 실행됨
       // console.log(pokemon.name.includes(search));
       return pokemon.name.includes(trimmedSearch);
     });
+    setIsFocus(true);
+    setIsExpand(true);
     setFilterPokemon(result);
   }, [pokemonList, search]);
 
-  const handleOnchange = (e) => {
+  const handleOnChange = useCallback((e) => {
     setSearch(e.target.value);
-  };
+  }, []);
+
+  const handleOnKeyDown = useCallback(
+    // Todo: dropdown의 첫번째 포켓몬만 엔터눌렀을 때 선택됨
+    (e) => {
+      if (e.code !== "Enter") return;
+
+      setSelectPokemonId(filterPokemon[0].id);
+      setIsExpand(false);
+      setIsFocus(false);
+      setSearch("");
+    },
+    [filterPokemon, setSelectPokemonId]
+  );
 
   return (
     <div
@@ -44,26 +58,17 @@ function SearchBar() {
                   transition-all duration-300
                   ${isFocus ? "w-full" : "mobile:w-160  w-246"}
                 `}
-        onChange={handleOnchange}
+        onKeyDown={handleOnKeyDown}
+        onChange={handleOnChange}
         value={search}
         onFocus={() => {
           setIsFocus(true);
-          if (isFocus) {
-            setIsExpand(true);
-          } else {
-            setTimeout(() => {
-              setIsExpand(true);
-            }, SEARCHBAR_WIDTH_DURATION * 1000);
-          }
+          setTimeout(() => setIsExpand(true), SEARCHBAR_WIDTH_DURATION * 1000);
         }}
         onBlur={(e) => {
-          const next = e.relatedTarget;
-          if (next instanceof HTMLLIElement) {
-            return;
-          } else {
-            setIsFocus(false);
-            setIsExpand(false);
-          }
+          if (dropdownRef.current?.contains(e.relatedTarget)) return;
+          setIsFocus(false);
+          setIsExpand(false);
         }}
       />
 
@@ -79,10 +84,10 @@ function SearchBar() {
         }
         `}
         >
-          {search ? (
+          {search.trim() && filterPokemon.length > 0 ? (
             filterPokemon.map((pokemon) => (
               <li
-                key={`${pokemon.name}`}
+                key={pokemon.name}
                 className="flex items-center px-16 py-8 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer"
                 onClick={() => {
                   setSelectPokemonId(pokemon.id);
@@ -107,8 +112,13 @@ function SearchBar() {
               </li>
             ))
           ) : (
-            <li className="w-full flex items-center px-16 py-8 dark:text-gray-100">
-              화면에 표시된 포켓몬 정보만 검색이 가능합니다.😭
+            <li
+              className="w-full flex items-center px-16 py-8 dark:text-gray-100"
+              tabIndex={-1}
+            >
+              {search.trim()
+                ? "검색 결과가 없습니다.😭"
+                : "화면에 표시된 포켓몬 정보만 검색이 가능합니다.😭"}
             </li>
           )}
         </div>
