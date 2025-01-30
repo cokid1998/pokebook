@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, memo } from "react";
 import TypeBadge from "@/components/TypeBadge/TypeBadge";
 import Modal from "@/components/Modal/Modal";
 import useExitAnimation from "@/hooks/useExitAnimation";
@@ -87,4 +87,4 @@ function Card({ pokemon }) {
   );
 }
 
-export default Card;
+export default memo(Card);
