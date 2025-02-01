@@ -1,5 +1,11 @@
 import colors from "@/styles/colors";
-const LoadingSpinner = ({ type }) => {
+import { PokemonTypeName } from "@/types/pokemonTypeName";
+
+interface LoadingSpinnerProps {
+  type: PokemonTypeName;
+}
+
+const LoadingSpinner = ({ type }: LoadingSpinnerProps) => {
   return (
     <div className="flex flex-col items-center gap-4">
       <div

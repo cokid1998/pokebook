@@ -1,7 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, MutableRefObject } from "react";
 import { flushSync } from "react-dom";
 
-const useExitAnimation = (ref, isOpen) => {
+const useExitAnimation = (
+  ref: MutableRefObject<HTMLDivElement | null>,
+  isOpen: boolean
+) => {
   const [readyAni, setReadyAni] = useState(false);
   // `readyAni`는 애니메이션이 준비되었는지를 나타내는 상태.
 
@@ -26,7 +29,7 @@ const useExitAnimation = (ref, isOpen) => {
       };
 
       // DOM에서 애니메이션이 종료된 순간을 감지하고 이벤트 핸들러를 등록
-      ref.current.addEventListener("animationend", handleAnimationEnd);
+      ref.current?.addEventListener("animationend", handleAnimationEnd);
     }
   }, [isOpen, readyAni, ref]);
 

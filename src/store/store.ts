@@ -3,7 +3,7 @@ import { create } from "zustand";
 export const useSelectPokemonIdStore = create((set) => {
   return {
     selectPokemonId: null,
-    setSelectPokemonId: (id) => {
+    setSelectPokemonId: (id: number) => {
       set({ selectPokemonId: id });
     },
     resetSelectedPokemonId: () => {

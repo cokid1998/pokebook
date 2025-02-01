@@ -1,7 +1,7 @@
 import API from "@/api/API";
 import { POKEMON_FETCH_UNIT } from "@/constants/constants";
 
-const getAllPokemonGifAndTypes = (pageParam) => {
+const getAllPokemonGifAndTypes = (pageParam: number) => {
   const firstPokeid =
     pageParam === 1
       ? pageParam
@@ -13,6 +13,7 @@ const getAllPokemonGifAndTypes = (pageParam) => {
   const fetchData = async () => {
     for (let i = firstPokeid; i <= lastPokeId; i++) {
       const res = await API.get(`/pokemon/${i}`);
+      console.log(res.data);
       // console.log(res.data.sprites.versions["generation-v"]["black-white"].animated.front_default); 포켓몬 gif
       gifArr.push(
         res.data.sprites.versions["generation-v"]["black-white"].animated

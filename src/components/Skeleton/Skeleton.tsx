@@ -2,7 +2,11 @@ import { POKEMON_FETCH_UNIT } from "@/constants/constants";
 
 const tmp = Array.from({ length: POKEMON_FETCH_UNIT }, (_, i) => i);
 
-function Skeleton({ style }) {
+interface SkeletonProps {
+  style?: string;
+}
+
+function Skeleton({ style }: SkeletonProps) {
   return (
     <main
       className={`flex-1 w-full bg-gray-50 dark:bg-gray-900 py-32 h-content-height ${style}`}

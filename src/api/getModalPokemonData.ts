@@ -3,10 +3,11 @@ import axios from "axios";
 
 const getRandomFlavorText = (arr) => {
   const randomIdx = Math.floor(Math.random() * arr.length);
+  console.log(arr);
   return arr[randomIdx].flavor_text;
 };
 
-const getModalPokemonData = (id) => {
+const getModalPokemonData = (id: number) => {
   const fetchData = async () => {
     const res = await API.get(`/pokemon-species/${id}`);
     const flavorTextKoArr = res.data.flavor_text_entries.filter(

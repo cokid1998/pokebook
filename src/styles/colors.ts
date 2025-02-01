@@ -1,4 +1,6 @@
-const colors = {
+import { PokemonTypeName } from "@/types/pokemonTypeName";
+
+const colors: Record<PokemonTypeName, string> = {
   normal: "#949495", // 노말
   water: "#5185C5", // 물
   fighting: "#E09C40", // 격투

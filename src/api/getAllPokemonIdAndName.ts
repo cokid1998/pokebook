@@ -1,7 +1,7 @@
 import API from "@/api/API";
 import { POKEMON_FETCH_UNIT } from "@/constants/constants";
 
-const getAllPokemonIdAndName = async (pageParam) => {
+const getAllPokemonIdAndName = async (pageParam: number) => {
   let result = [];
 
   const firstPokeid =

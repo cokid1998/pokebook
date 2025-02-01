@@ -1,4 +1,6 @@
-const typeToKorean = (type) => {
+import { PokemonTypeName } from "@/types/pokemonTypeName";
+
+const typeToKorean = (type: PokemonTypeName) => {
   switch (type) {
     case "normal":
       return "일반";

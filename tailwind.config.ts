@@ -16,7 +16,7 @@ const FOOTER_HEIGHT = pxToRemFunc(94);
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: "class",
-  content: ["./src/**/*.{html,jsx,js}"],
+  content: ["./src/**/*.{html,tsx,ts}"],
   presets: [pxToRem],
   theme: {
     screens: {

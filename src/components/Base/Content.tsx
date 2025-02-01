@@ -1,4 +1,4 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 import getAllPokemonIdName from "@/api/getAllPokemonIdAndName";
 import getAllPokemonGifAndTypes from "@/api/getAllPokemonGifAndTypes";
 import Card from "@/components/Card/Card";
@@ -17,7 +17,7 @@ function Content() {
     isFetchingNextPage,
     isError,
     error,
-  } = useInfiniteQuery({
+  } = useSuspenseInfiniteQuery({
     initialPageParam: 0,
     queryKey: ["pokemonData"],
     queryFn: async ({ pageParam }) => {
@@ -36,7 +36,6 @@ function Content() {
       // 다음 페이지의 파라미터 반환 (예: next 페이지가 존재하면 증가)
       return lastPage.length > 0 ? allPages.length : undefined;
     },
-    suspense: true,
   });
 
   useEffect(() => {

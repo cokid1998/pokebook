@@ -16,8 +16,9 @@ import Psychic from "@/asset/icon/psychic.svg";
 import Rock from "@/asset/icon/rock.svg";
 import Steel from "@/asset/icon/steel.svg";
 import Water from "@/asset/icon/water.svg";
+import { PokemonTypeName } from "@/types/pokemonTypeName";
 
-const typeToIcon = (type) => {
+const typeToIcon = (type: PokemonTypeName) => {
   switch (type) {
     case "normal":
       return <Normal />;

@@ -8,7 +8,7 @@ import { useEffect } from "react";
  * (모달이 열리면서 스크롤바가 없어지며 기존 UI가 깨지는 현상 방지)
  */
 
-function useBodyScrollLock(isModalOpen) {
+function useBodyScrollLock(isModalOpen: boolean) {
   useEffect(() => {
     const scrollbarWidth = window.innerWidth - document.body.clientWidth;
     document.body.style.overflow = "hidden";

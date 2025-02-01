@@ -1,8 +1,17 @@
-import { useContext, useState, createContext, useEffect } from "react";
+import {
+  useContext,
+  useState,
+  createContext,
+  useEffect,
+  PropsWithChildren,
+} from "react";
 
-const DarkModeContext = createContext();
+const DarkModeContext = createContext({
+  darkMode: false,
+  handleDarkMode: () => {},
+});
 
-export function DarkModeProvider({ children }) {
+export function DarkModeProvider({ children }: PropsWithChildren) {
   const [darkMode, setDarkMode] = useState(
     localStorage.getItem("darkMode") === "dark"
   );
