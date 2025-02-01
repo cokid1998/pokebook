@@ -1,9 +1,10 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
+import { BaseURL } from "pokenode-ts";
 
-const baseURL = "https://pokeapi.co/api/v2";
+export default class API {
+  static instance = axios.create({ baseURL: BaseURL.REST });
 
-const API = axios.create({
-  baseURL,
-});
-
-export default API;
+  static get<T = any, R = AxiosResponse<T>>(path: string): Promise<R> {
+    return this.instance.get(path);
+  }
+}

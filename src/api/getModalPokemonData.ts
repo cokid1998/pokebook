@@ -1,15 +1,23 @@
 import API from "@/api/API";
 import axios from "axios";
+import type {
+  PokemonSpecies,
+  Pokemon,
+  FlavorText,
+  APIResource,
+  Ability,
+  Name,
+} from "pokenode-ts";
 
-const getRandomFlavorText = (arr) => {
+const getRandomFlavorText = (arr: FlavorText[]) => {
   const randomIdx = Math.floor(Math.random() * arr.length);
-  console.log(arr);
+
   return arr[randomIdx].flavor_text;
 };
 
 const getModalPokemonData = (id: number) => {
   const fetchData = async () => {
-    const res = await API.get(`/pokemon-species/${id}`);
+    const res = await API.get<PokemonSpecies>(`/pokemon-species/${id}`);
     const flavorTextKoArr = res.data.flavor_text_entries.filter(
       (item) => item.language.name === "ko"
     );
@@ -18,20 +26,24 @@ const getModalPokemonData = (id: number) => {
       (item) => item.language.name === "ko"
     )[0].genus;
 
-    const abilityAndShinyRes = await API.get(`/pokemon/${id}`);
+    const abilityAndShinyRes = await API.get<Pokemon>(`/pokemon/${id}`);
 
     const shinyGif =
       abilityAndShinyRes.data.sprites.versions["generation-v"]["black-white"]
         .animated.front_shiny;
 
-    let abilitiesUrlKo = [];
+    let abilitiesUrlKo: APIResource["url"][] = [];
     abilityAndShinyRes.data.abilities.forEach((item) => {
       abilitiesUrlKo.push(item.ability.url);
     });
 
-    const abilitiesInfoKoArr = [];
+    const abilitiesInfoKoArr: {
+      abilityNameKo: Name["name"];
+      abilityFlavorTextKo: FlavorText["flavor_text"];
+    }[] = [];
+
     for (let i = 0; i < abilitiesUrlKo.length; i++) {
-      await axios.get(abilitiesUrlKo[i]).then((item) => {
+      await axios.get<Ability>(abilitiesUrlKo[i]).then((item) => {
         const abilityNameKoInfoArr = item.data.names.filter(
           (nameInfo) => nameInfo.language.name === "ko"
         );
