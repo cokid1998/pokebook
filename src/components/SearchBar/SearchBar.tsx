@@ -94,7 +94,7 @@ function SearchBar() {
             filterPokemon.map((pokemon) => (
               <li
                 key={pokemon.name}
-                className="flex items-center px-16 py-8 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer"
+                className="flex items-center px-16 py-8 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer gap-12"
                 onClick={() => {
                   setSelectPokemonId(pokemon.id);
                   setIsExpand(false);
@@ -107,13 +107,11 @@ function SearchBar() {
                   alt={pokemon.name}
                   className="w-30 h-30 object-contain"
                 />
-                <div className="ml-12">
-                  {/* <div className="text-sm text-gray-400 dark:text-gray-500">
-                    {pokemon.number}
-                  </div> */}
-                  <div className="text-gray-900 dark:text-gray-100">
-                    {pokemon.name}
-                  </div>
+                <div className="text-sm text-gray-400 dark:text-gray-500">
+                  #{String(pokemon.id).padStart(3, "0")}
+                </div>
+                <div className="text-gray-900 dark:text-gray-100">
+                  {pokemon.name}
                 </div>
               </li>
             ))
