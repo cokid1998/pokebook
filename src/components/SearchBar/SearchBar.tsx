@@ -2,16 +2,19 @@ import { Search } from "lucide-react";
 import { useSelectPokemonIdStore, usePokemonListStore } from "@/store/store";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { SEARCHBAR_WIDTH_DURATION } from "@/constants/constants";
+import { GlobalStatePokemonType } from "@/types/globalStatePokemonType";
 
 function SearchBar() {
   const [search, setSearch] = useState("");
-  const [filterPokemon, setFilterPokemon] = useState([]);
+  const [filterPokemon, setFilterPokemon] = useState<GlobalStatePokemonType[]>(
+    []
+  );
   const { setSelectPokemonId } = useSelectPokemonIdStore();
   const { pokemonList } = usePokemonListStore();
 
   const [isFocus, setIsFocus] = useState(false);
   const [isExpand, setIsExpand] = useState(false);
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!search) return;
@@ -26,13 +29,16 @@ function SearchBar() {
     setFilterPokemon(result);
   }, [pokemonList, search]);
 
-  const handleOnChange = useCallback((e) => {
-    setSearch(e.target.value);
-  }, []);
+  const handleOnChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setSearch(e.target.value);
+    },
+    []
+  );
 
   const handleOnKeyDown = useCallback(
     // Todo: dropdown의 첫번째 포켓몬만 엔터눌렀을 때 선택됨
-    (e) => {
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (e.code !== "Enter") return;
 
       setSelectPokemonId(filterPokemon[0].id);
@@ -102,9 +108,9 @@ function SearchBar() {
                   className="w-30 h-30 object-contain"
                 />
                 <div className="ml-12">
-                  <div className="text-sm text-gray-400 dark:text-gray-500">
+                  {/* <div className="text-sm text-gray-400 dark:text-gray-500">
                     {pokemon.number}
-                  </div>
+                  </div> */}
                   <div className="text-gray-900 dark:text-gray-100">
                     {pokemon.name}
                   </div>

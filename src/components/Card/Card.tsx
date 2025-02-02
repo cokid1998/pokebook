@@ -4,11 +4,16 @@ import Modal from "@/components/Modal/Modal";
 import useExitAnimation from "@/hooks/useExitAnimation";
 import { useSelectPokemonIdStore } from "@/store/store";
 import { CARD_FOCUS_DURATION } from "@/constants/constants";
+import { GlobalStatePokemonType } from "@/types/globalStatePokemonType";
 
-function Card({ pokemon }) {
+interface CardProps {
+  pokemon: GlobalStatePokemonType;
+}
+
+function Card({ pokemon }: CardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { types, gif, id, name } = pokemon;
-  const modalRef = useRef(null);
+  const modalRef = useRef<HTMLDivElement | null>(null);
   const isExiting = useExitAnimation(modalRef, isModalOpen);
   // isExiting을 콘솔로그로 찍어보면 불러온 포켓몬 데이터만큼 실행됨... 성능최적화 필요
   const { selectPokemonId, resetSelectedPokemonId } = useSelectPokemonIdStore();
@@ -17,11 +22,11 @@ function Card({ pokemon }) {
     setIsModalOpen(true);
   };
 
-  const focusRef = useRef();
+  const focusRef = useRef<HTMLDivElement | null>();
 
   useEffect(() => {
     if (id !== selectPokemonId) return;
-    focusRef.current.scrollIntoView({
+    focusRef.current?.scrollIntoView({
       block: "center",
       inline: "center",
     });
@@ -68,7 +73,7 @@ function Card({ pokemon }) {
             </h3>
             <div className="mt-8 flex gap-10 justify-center">
               {types.map((type, idx) => (
-                <TypeBadge key={idx} type={type} koreanType={type.koreanType} />
+                <TypeBadge key={idx} type={type} />
               ))}
             </div>
           </div>
@@ -77,7 +82,7 @@ function Card({ pokemon }) {
 
       {(isModalOpen || isExiting) && (
         <Modal
-          modalRef={modalRef}
+          ref={modalRef}
           pokemon={pokemon}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}

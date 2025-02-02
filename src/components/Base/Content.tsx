@@ -39,7 +39,7 @@ function Content() {
   });
 
   useEffect(() => {
-    const cb = (entry) => {
+    const cb: IntersectionObserverCallback = (entry) => {
       if (entry[0].isIntersecting) {
         // Todo: 무한스크롤 영역에 도달했을 때 실행되는 로직
         fetchNextPage();

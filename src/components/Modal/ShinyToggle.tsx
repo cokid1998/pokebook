@@ -1,4 +1,8 @@
-function ShinyToggle({ setShowShiny }) {
+interface ShintyToggle {
+  setShowShiny: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function ShinyToggle({ setShowShiny }: ShintyToggle) {
   return (
     <div className="flex justify-center items-end mt-12">
       <label className="relative inline-flex items-center cursor-pointer">
