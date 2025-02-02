@@ -87,7 +87,7 @@
 ```
 Feat: 새로운 기능추가
 Fix: 버그 수정
-Docs: 문서 수정
+Docs: 문서 수정
 Style: CSS 등 사용자 UI 디자인 변경
 Refactor: 리팩토링
 Test: 테스트 코드
