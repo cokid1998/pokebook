@@ -1,25 +1,28 @@
-import { useEffect, useRef, useState, memo } from "react";
+import { useEffect, useRef, memo } from "react";
 import TypeBadge from "@/components/TypeBadge/TypeBadge";
 import Modal from "@/components/Modal/Modal";
 import useExitAnimation from "@/hooks/useExitAnimation";
 import { useSelectPokemonIdStore } from "@/store/store";
 import { CARD_FOCUS_DURATION } from "@/constants/constants";
 import { GlobalStatePokemonType } from "@/types/globalStatePokemonType";
+import { useModalStore, useOpenModal } from "@/store/modalStore";
 
 interface CardProps {
   pokemon: GlobalStatePokemonType;
 }
 
 function Card({ pokemon }: CardProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isOpen } = useModalStore();
   const { types, gif, id, name } = pokemon;
   const modalRef = useRef<HTMLDivElement | null>(null);
-  const isExiting = useExitAnimation(modalRef, isModalOpen);
+  const isExiting = useExitAnimation(modalRef, isOpen);
   // isExiting을 콘솔로그로 찍어보면 불러온 포켓몬 데이터만큼 실행됨... 성능최적화 필요
+  // Todo: isExiting 로직 삭제 후 모달 삭제 애니메이션 구현
   const { selectPokemonId, resetSelectedPokemonId } = useSelectPokemonIdStore();
+  const openModal = useOpenModal();
 
   const handleClick = () => {
-    setIsModalOpen(true);
+    openModal(<Modal ref={modalRef} pokemon={pokemon} />);
   };
 
   const focusRef = useRef<HTMLDivElement | null>();
@@ -79,15 +82,6 @@ function Card({ pokemon }: CardProps) {
           </div>
         </div>
       </div>
-
-      {(isModalOpen || isExiting) && (
-        <Modal
-          ref={modalRef}
-          pokemon={pokemon}
-          isModalOpen={isModalOpen}
-          setIsModalOpen={setIsModalOpen}
-        />
-      )}
     </>
   );
 }
