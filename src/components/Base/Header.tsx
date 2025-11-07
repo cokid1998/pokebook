@@ -1,11 +1,16 @@
 import { Moon, Sun } from "lucide-react";
 import Logo from "@/asset/Logo.png";
-import { useDarkMode } from "@/Context/DarkModeContext";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import { DARKMODE_TOGGLE_DURATION } from "@/constants/constants";
+import { useSetTheme, useTheme } from "@/store/themeStore";
 
 function Header() {
-  const { darkMode, handleDarkMode } = useDarkMode();
+  const currentTheme = useTheme();
+  const setTheme = useSetTheme();
+
+  const handleDarkMode = () => {
+    setTheme(currentTheme === "dark" ? "light" : "dark");
+  };
 
   return (
     <header className="h-header-height sticky top-0 z-50 w-full bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-16 py-12">
@@ -24,7 +29,7 @@ function Header() {
                 DARKMODE_TOGGLE_DURATION * 1000
               }`}
             >
-              {darkMode ? (
+              {currentTheme === "light" ? (
                 <Sun className={`text-gray-500`} size={24} />
               ) : (
                 <Moon className={`text-gray-500`} size={24} />

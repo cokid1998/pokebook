@@ -1,33 +1,56 @@
 <!doctype html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="https://pokebook-ruby.vercel.app/favicon.ico" type="image/x-icon">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PokeBook - 포켓몬 도감 프로젝트</title>
 
-    <!-- SEO -->
-    <!-- 구글에 등록 -->
-    <meta name="google-site-verification" content="2PswJrbxbNw--cEcBbPOOfdoDB7S1Ymta3ka0zDX8l0" />
-    <!-- 네이버에 등록 -->
-    <meta name="naver-site-verification" content="26f7c655d77faed76a19eedd737cf50065e722e7" />
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="https://pokebook-ruby.vercel.app/favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PokeBook - 포켓몬 도감 프로젝트</title>
 
-    <meta name="description" content="포켓몬 도감 프로젝트로 모든 포켓몬의 정보를 확인하고 모달로 세부 정보를 볼 수 있습니다.">
-    <meta name="keywords" content="포켓몬, 포켓북, 포켓몬 도감, pokemon, pokebook, react">
-    <meta name="author" content="cokid1998">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://pokebook-ruby.vercel.app">
+  <!-- SEO -->
+  <!-- 구글에 등록 -->
+  <meta name="google-site-verification" content="2PswJrbxbNw--cEcBbPOOfdoDB7S1Ymta3ka0zDX8l0" />
+  <!-- 네이버에 등록 -->
+  <meta name="naver-site-verification" content="26f7c655d77faed76a19eedd737cf50065e722e7" />
 
-    <!-- og tag -->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="PokeBook">
-    <meta property="og:title" content="포켓몬 도감">
-    <meta property="og:description" content="포켓몬의 상세 정보를 모달을 통해 확인할 수 있는 React 기반 포켓몬 도감 프로젝트.">
-    <meta property="og:image" content="/src/asset/pikachu.png">
-    <meta property="og:url" content="https://pokebook-ruby.vercel.app">
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+  <meta name="description" content="포켓몬 도감 프로젝트로 모든 포켓몬의 정보를 확인하고 모달로 세부 정보를 볼 수 있습니다.">
+  <meta name="keywords" content="포켓몬, 포켓북, 포켓몬 도감, pokemon, pokebook, react">
+  <meta name="author" content="cokid1998">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://pokebook-ruby.vercel.app">
+
+  <!-- og tag -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="PokeBook">
+  <meta property="og:title" content="포켓몬 도감">
+  <meta property="og:description" content="포켓몬의 상세 정보를 모달을 통해 확인할 수 있는 React 기반 포켓몬 도감 프로젝트.">
+  <meta property="og:image" content="/src/asset/pikachu.png">
+  <meta property="og:url" content="https://pokebook-ruby.vercel.app">
+
+  <script>
+    const themeStore = localStorage.getItem("ThemeStore") ? JSON.parse(
+      localStorage.getItem("ThemeStore")
+    ) : null
+    const theme = themeStore.state.theme;
+
+    const HTMLTag = document.documentElement;
+    HTMLTag.classList.remove("dark", "light");
+
+    if (theme === 'system') {
+      const isDarkTheme = window.matchMedia(
+        "prefers-color-scheme: dark",
+      ).matches
+
+      HTMLTag.classList.add(isDarkTheme ? "dark" : "light")
+    } else {
+      HTMLTag.classList.add(theme)
+    }
+  </script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>
