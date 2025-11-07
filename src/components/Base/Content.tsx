@@ -2,12 +2,13 @@ import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
 import getAllPokemonIdName from "@/api/getAllPokemonIdAndName";
 import getAllPokemonGifAndTypes from "@/api/getAllPokemonGifAndTypes";
 import Card from "@/components/Card/Card";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import Skeleton from "@/components/Skeleton/Skeleton";
 import { usePokemonListStore } from "@/store/store";
+import { useInView } from "react-intersection-observer";
 
 function Content() {
-  const ref = useRef(null);
+  const { inView, ref } = useInView();
   const { pokemonList, setPokemonList } = usePokemonListStore();
   const {
     data,
@@ -39,18 +40,10 @@ function Content() {
   });
 
   useEffect(() => {
-    const cb: IntersectionObserverCallback = (entry) => {
-      if (entry[0].isIntersecting) {
-        // Todo: 무한스크롤 영역에 도달했을 때 실행되는 로직
-        fetchNextPage();
-      }
-    };
-    const option = { threshold: 1 };
-    const observer = new IntersectionObserver(cb, option);
-    if (ref.current) {
-      observer.observe(ref.current);
+    if (inView) {
+      fetchNextPage();
     }
-  }, []);
+  }, [inView]);
 
   // Todo: suspense 에러처리
   // if (nameInfo.isError || gifTypesInfo.isError)
